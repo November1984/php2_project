@@ -1,9 +1,9 @@
 {
-    "name": "geekbrains/leveltwo",
+    "name": "geekbrain/leveltwo",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Geekbrains\\Leveltwo\\": "src/"
+            "GeekBrains\\LevelTwo\\": "src/"
         }
     },
     "require": {
