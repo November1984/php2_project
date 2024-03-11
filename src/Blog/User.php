@@ -6,8 +6,8 @@ class User {
     private int $id;
     private string $userName;
     private string $userLastName;
-    function __construct(string $userName, string $userLastName){
-            $this->id = 1;
+    function __construct(int $id, string $userName, string $userLastName){
+            $this->id = $id;
             $this->userName = $userName;
             $this->userLastName = $userLastName;
     }
