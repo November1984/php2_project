@@ -1,11 +1,11 @@
 <?php
 
-namespace GeekBrains\LevelTwo\Blog;
+namespace GeekBrains\MainLevel\Blog;
 
 class Comment{
     function __construct(
         private int $id,
-        private int $userId,
+        private UUID $userId,
         private int $postId, 
         private string $text
     ){

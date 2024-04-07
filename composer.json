@@ -1,13 +1,14 @@
 {
-    "name": "geekbrain/leveltwo",
+    "name": "geekbrain/mainlevel",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "GeekBrains\\LevelTwo\\": "src/"
+            "GeekBrains\\MainLevel\\": "src/"
         }
     },
     "require": {
-        "fakerphp/faker": "^1.23"
+        "fakerphp/faker": "^1.23",
+        "symfony/polyfill-uuid": "^1.29"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest"
