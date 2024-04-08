@@ -41,7 +41,7 @@ class SQLUserRepository implements UserRepositoryInterface
     }
     public function saveUser(User $user)
     {
-        if ($this->isUserNameExist($user->getLogin()))
+        if (!$this->isUserNameExist($user->getLogin()))
         {
             $statement = $this->pdo->prepare(
                 "INSERT INTO users (uuid, first_name, last_name, login) 
@@ -82,7 +82,7 @@ class SQLUserRepository implements UserRepositoryInterface
         {
             return false;
         };
-
+        
         throw new UserExistException ("Login is taken");
     }
 }

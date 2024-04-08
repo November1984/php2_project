@@ -2,6 +2,8 @@
 
 $pdo = new PDO ("sqlite:src/Blog/blog.sqlite");
 
+$pdo->exec("DROP TABLE users");
+
 $pdo->exec(
     "CREATE TABLE users (
         uuid        TEXT NOT NULL
