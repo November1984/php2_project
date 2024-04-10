@@ -19,22 +19,37 @@ class CreateUserCommand
      * запускает процесс создания пользователя
      */
 
-    public function handle(array $input)
+    public function handle(array $rawInput)
     {
-        for ($i = 1; $i < count($input); $i++)
+        $input = $this->parseRawInput($rawInput);
+        
+        $this->repository->saveUser(new User (
+            UUID::random(),
+            $input["login"],
+            $input["firstname"],
+            $input["lastname"]
+        ));
+        die;
+    }
+
+    private function parseRawInput(array $rawInput): array
+    {
+        $input = [];
+
+        foreach ($rawInput as $argument)
         {
-            $part = mb_split("=", $input[$i]);
-            // Параметры, записанные через пробел, отбрасываются
-            if ((count($part) !== 2) || ($part[0] == "") || ($part[1] == ""))
+            $parts = explode("=", $argument);
+            // Параметры, записанные через пробел, отбрасываются (# username=ab cd)
+            if ((count($parts) !== 2) || ($parts[0] == "") || ($parts[1] == ""))
             {
                 continue;
             }
-            $arr[$part[0]] = $part[1];
+            $input[$parts[0]] = $parts[1];
         }
         $err = false;
         $errMsg="";
         foreach (["login", "firstname", "lastname"] as $key) {
-            if (!key_exists($key,$arr))
+            if (!key_exists($key,$input))
             {
                 $errMsg = $errMsg . "Ключ $key не найден" . PHP_EOL;
                 $err=true;
@@ -44,13 +59,6 @@ class CreateUserCommand
         {
             throw new CommandException($errMsg);
         }
-        
-        $this->repository->saveUser(new User (
-            UUID::random(),
-            $arr["login"],
-            $arr["firstname"],
-            $arr["lastname"]
-        ));
-        die;
+        return $input;
     }
 }
