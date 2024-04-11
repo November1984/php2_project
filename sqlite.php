@@ -8,7 +8,7 @@ $pdo->exec(
     "CREATE TABLE users (
         uuid        TEXT NOT NULL
             CONSTRAINT uuid_primary_key PRIMARY KEY, 
-        first_name  TEXT NOT NULL, 
+        first_name  TEXT, 
         last_name   TEXT, 
         login       TEXT NOT NULL
             CONSTRAINT login_uniqe_key UNIQUE

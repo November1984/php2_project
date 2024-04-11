@@ -1,5 +1,7 @@
 <?php
 
+use GeekBrains\LevelTwo\Blog\Commands\Arguments;
+use GeekBrains\MainLevel\Blog\Commands\Arguments as CommandsArguments;
 use GeekBrains\MainLevel\Blog\Commands\CreateUserCommand;
 use GeekBrains\MainLevel\Blog\Exceptions\UserNotFoundException;
 use GeekBrains\MainLevel\Blog\Person\User;
@@ -58,11 +60,7 @@ $repository = new SQLUserRepository($connection);
 $command = new CreateUserCommand($repository);
 
 try
-{$command->handle($argv);}
-catch (CommandException $err)
-{
-  echo $err->getMessage();
-}
+{$command->handle(CommandsArguments::fromArgv($argv));}
 catch (Exception $err)
 {
   echo $err->getMessage().PHP_EOL;

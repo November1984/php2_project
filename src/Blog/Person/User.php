@@ -6,9 +6,9 @@ use GeekBrains\MainLevel\Blog\UUID;
 
 class User {
     private UUID $id;
-    private string $userName;
+    private ?string $userName;
     private ?string $userLastName;
-    private ?string $userLogin;
+    private string $userLogin;
     function __construct(   UUID   $id, 
                             string $userLogin, 
                             ?string $userName = null, 
@@ -33,7 +33,7 @@ class User {
     {
         return $this->id;
     }
-    public function getUserName(): string
+    public function getUserName(): ?string
     {
         return $this->userName;
     }

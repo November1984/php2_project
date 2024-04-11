@@ -5,7 +5,6 @@ namespace GeekBrains\MainLevel\Blog\Commands;
 use GeekBrains\MainLevel\Blog\Person\User;
 use GeekBrains\MainLevel\Blog\UUID;
 use GeekBrains\MainLevel\Blog\Repositories\UserRepositoryInterface;
-use GeekBrains\MainLevel\Blog\Exceptions\CommandException;
 
 class CreateUserCommand
 {
@@ -19,20 +18,17 @@ class CreateUserCommand
      * запускает процесс создания пользователя
      */
 
-    public function handle(array $rawInput)
+    public function handle(Arguments $input)
     {
-        $input = $this->parseRawInput($rawInput);
-        
         $this->repository->saveUser(new User (
             UUID::random(),
-            $input["login"],
-            $input["firstname"],
-            $input["lastname"]
+            $input->get('login'),
+            $input->get("firstname"),
+            $input->get("lastname")
         ));
-        die;
     }
 
-    private function parseRawInput(array $rawInput): array
+   /*  private function parseRawInput(array $rawInput): array
     {
         $input = [];
 
@@ -60,5 +56,5 @@ class CreateUserCommand
             throw new CommandException($errMsg);
         }
         return $input;
-    }
+    } */
 }
