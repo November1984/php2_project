@@ -2,25 +2,50 @@
 
 namespace GeekBrains\MainLevel\Blog;
 
-class Post {
+use GeekBrains\MainLevel\Blog\Repositories\PostRepositoryInterface;
+use GeekBrains\MainLevel\Blog\UUID;
+
+class Post
+{
     function __construct(
-        private int $id,
+        private UUID $uuid,
         private UUID $userID,
         private string $title,
-        private string $text
+        private string $text,
+        private string $dateOfCreation
     ){
-        $this->id = $id;
+        $this->uuid = $uuid;
         $this->userID = $userID;
         $this->title = $title;
         $this->text = $text;
+        $this->dateOfCreation = (string) date("yyyy-mm-dd h:i");
+    }
+    public function getId(): UUID
+    {
+            return $this->uuid;
     }
 
-        public function getId(): int
-        {
-                return $this->id;
-        }
+    public function __toString(){
+        return $this->title." >>> ".$this->text;
+    }
 
-        function __toString(){
-            return $this->title." >>> ".$this->text;
-        }
+    public function getUserID(): UUID
+    {
+            return $this->userID;
+    }
+
+    public function getTitle(): string
+    {
+            return $this->title;
+    }
+
+    public function getText(): string
+    {
+            return $this->text;
+    }
+
+    public function getDateOfCreation(): string
+    {
+            return $this->dateOfCreation;
+    }
 }

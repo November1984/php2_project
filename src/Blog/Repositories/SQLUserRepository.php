@@ -32,7 +32,6 @@ class SQLUserRepository implements UserRepositoryInterface
         $statement = $this->pdo->prepare(
             "SELECT * FROM users WHERE login = :login"
         );
-
         $statement->execute([
             ":login" => strip_tags(htmlspecialchars_decode($login)),
         ]);
@@ -41,7 +40,7 @@ class SQLUserRepository implements UserRepositoryInterface
     }
     public function saveUser(User $user)
     {
-        if (!$this->isUserNameExist($user->getLogin()))
+        if (!$this->isUserLoginExist($user->getLogin()))
         {
             $statement = $this->pdo->prepare(
                 "INSERT INTO users (uuid, first_name, last_name, login) 
@@ -70,7 +69,7 @@ class SQLUserRepository implements UserRepositoryInterface
                          $result["first_name"], 
                          $result["last_name"]);
     }
-    private function isUserNameExist(string $user): bool
+    private function isUserLoginExist(string $user): bool
     {
         $statement = $this->pdo->prepare("SELECT * FROM users
                                           WHERE login = :login");
